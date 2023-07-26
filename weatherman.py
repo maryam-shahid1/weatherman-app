@@ -22,7 +22,7 @@ def main():
     type_index = 1
 
     for i in range(2, arguments_len, 2):
-        report_type = sys.argv[type_index]
+        report_type = sys.argv[type_index] 
 
         if (report_type == '-e'):
             year = sys.argv[i]

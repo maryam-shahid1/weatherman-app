@@ -7,7 +7,7 @@ class TerminalColors:
 class Report:
 
     def year_report(readings):
-        print("---- YEAR REPORT ----")
+        print("---- YEAR REPORT ----") 
         print('Highest: ', readings.highest, 'C on ',
               readings.highest_day, readings.highest_month)
         print("Lowest: ", readings.lowest,  'C on ',

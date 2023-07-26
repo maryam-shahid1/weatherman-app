@@ -13,7 +13,7 @@ def get_values(day, month, temp):
     return values
 
 
-def get_day_and_month(date):
+def get_day_and_month(date): 
     data = date.split('-')
     day = data[2]
     month = get_month(int(data[1]))
