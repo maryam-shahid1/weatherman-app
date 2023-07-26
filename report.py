@@ -13,7 +13,7 @@ class Report:
         print("Lowest: ", readings.lowest,  'C on ',
               readings.lowest_day, readings.lowest_month)
         print("Humidity: ", readings.humidity, '% on ',
-              readings.humid_day, readings.humid_month)
+              readings.humid_day, readings.humid_month) 
 
     def month_report(readings):
         print("----- MONTH REPORT ----") 
