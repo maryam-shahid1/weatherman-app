@@ -1,30 +1,33 @@
-def months_list():
-    return ['Jan', 'Feb', 'Mar',
-            'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec']
+def get_month(value):
+    months = {
+                1: 'Jan', 2: 'Feb', 3: 'Mar',
+                4: 'Apr', 5: 'May', 6: 'Jun',
+                7: 'Jul', 8: 'Aug', 9: 'Sep',
+                10: 'Oct', 11: 'Nov', 12: 'Dec'
+            }
+    return months[value]
 
 
-def append_values(day, month, temp):
-    values = []
-    values.append(day)
-    values.append(month)
-    values.append(temp)
+def get_values(day, month, temp):
+    values = {"day": day, "month": month, "temp": temp}
     return values
 
 
-def dayAndMonth(date):
+def get_day_and_month(date):
     data = date.split('-')
     day = data[2]
-    month = data[1]
-    month_list = months_list()
-    month = month_list[int(month)-1]
+    month = get_month(int(data[1]))
     return day, month
 
 
 class ReportCalculations:
 
+    '''A class that calculates monthly and yearly weather report statistics.'''
+
     def month_calculations(weather_readings):
+        '''Calculates average highest temperature, average lowest
+            temperature, and average humidity for a month.'''
+
         max_count = 0
         min_count = 0
         humidity_count = 0
@@ -51,7 +54,8 @@ class ReportCalculations:
         return avg_highest, avg_lowest, avg_humidity
 
     def year_calculations(self, weather_readings):
-
+        '''Calculates highest temperature, lowest temperature, 
+            and highest humidity for the year.'''
         highest_temp = -100
         highest_temp_day = ''
         lowest_temp = 100
@@ -77,15 +81,15 @@ class ReportCalculations:
                     most_humid = reading.mean_humidity
                     most_humid_day = reading.day
 
-        highest_day, highest_month = dayAndMonth(highest_temp_day)
-        lowest_day, lowest_month = dayAndMonth(lowest_temp_day)
-        humid_day, humid_month = dayAndMonth(most_humid_day)
+        highest_day, highest_month = get_day_and_month(highest_temp_day)
+        lowest_day, lowest_month = get_day_and_month(lowest_temp_day)
+        humid_day, humid_month = get_day_and_month(most_humid_day)
 
-        highest_values = append_values(highest_day, highest_month,
+        highest_values = get_values(highest_day, highest_month,
                                        highest_temp)
-        lowest_values = append_values(lowest_day, lowest_month,
+        lowest_values = get_values(lowest_day, lowest_month,
                                       lowest_temp)
-        humid_values = append_values(humid_day, humid_month,
+        humid_values = get_values(humid_day, humid_month,
                                      most_humid)
 
         return highest_values, lowest_values, humid_values

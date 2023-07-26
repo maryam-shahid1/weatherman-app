@@ -1,72 +1,23 @@
 import sys
 import os
-from report import *
 from calculations import *
+from weather_reading import *
+from data_parsing import *
+from report import *
 
 
-def months_list():
-    return ['Jan', 'Feb', 'Mar',
-            'Apr', 'May', 'Jun',
-            'Jul', 'Aug', 'Sep',
-            'Oct', 'Nov', 'Dec']
-
-
-class WeatherReading:
-
-    def __init__(self, day, max_temp, mean_temp,
-                 min_temp, mean_humidity):
-        self.day = day
-        self.max_temp = max_temp
-        self.mean_temp = mean_temp
-        self.min_temp = min_temp
-        self.mean_humidity = mean_humidity
-
-
-class ParsingData:
-
-    def parsing_data(self, file):
-        file_content = file.readlines()
-        file_size = len(file_content)
-        list = []
-
-        for i in range(1, file_size):
-            data = file_content[i]
-            reading = data.split(',')
-            day = reading[0]
-            max_temp = mean_temp = min_temp = mean_humidity = ''
-            if reading[1] != '' and reading[1] != ',':
-                max_temp = int(reading[1])
-            if reading[2] != '' and reading[2] != ',':
-                mean_temp = int(reading[2])
-            if reading[3] != '' and reading[3] != ',':
-                min_temp = int(reading[3])
-            if reading[8] != '' and reading[8] != ',':
-                mean_humidity = int(reading[8])
-
-            list.append(WeatherReading(day, max_temp, mean_temp,
-                                       min_temp, mean_humidity))
-        return list
-
-    def month_parsing(self, file_name):
-        file = open(file_name, "r")
-        list = self.parsing_data(file)
-        return list
-
-    def year_parsing(self, filename):
-        monthly_readings = []
-        months = months_list()
-        for i in range(12):
-            file_name = filename + '_' + months[i] + '.txt'
-            if os.path.isfile(file_name):
-                file = open(file_name)
-                list = self.parsing_data(file)
-                monthly_readings.append(list)
-        return monthly_readings
+def get_month(value):
+    months = {
+                1: 'Jan', 2: 'Feb', 3: 'Mar',
+                4: 'Apr', 5: 'May', 6: 'Jun',
+                7: 'Jul', 8: 'Aug', 9: 'Sep',
+                10: 'Oct', 11: 'Nov', 12: 'Dec'
+            }
+    return months[value]
 
 
 def main():
 
-    
     arguments_len = len(sys.argv)
     type_index = 1
 
@@ -94,9 +45,9 @@ def main():
             data = period.split('/')
             year = data[0]
             month = int(data[1])
-            month_list = months_list()
+            month = get_month(month)
             file_name = ("weatherfiles/Murree_weather_" + year + "_"
-                         + month_list[month-1] + ".txt")
+                         + month + ".txt")
 
             parse = ParsingData()
             weather_readings = parse.month_parsing(file_name)
@@ -114,9 +65,9 @@ def main():
             data = period.split('/')
             year = data[0]
             month = int(data[1])
-            month_list = months_list()
+            month = get_month(month)
             file_name = ("weatherfiles/Murree_weather_" + year + "_"
-                         + month_list[month-1] + ".txt")
+                         + month + ".txt")
 
             parse = ParsingData()
             weather_readings = parse.month_parsing(file_name)
