@@ -30,7 +30,7 @@ def main():
 
             parse = ParsingData()
             weather_readings = parse.year_parsing(file_name)
-
+ 
             calculations = ReportCalculations()
             highest, lowest, humid = calculations.year_calculations(weather_readings)
 

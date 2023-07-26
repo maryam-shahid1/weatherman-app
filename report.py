@@ -16,7 +16,7 @@ class Report:
               readings.humid_day, readings.humid_month)
 
     def month_report(readings):
-        print("----- MONTH REPORT ----")
+        print("----- MONTH REPORT ----") 
         print('Highets Average: ', readings.highest_avg, 'C')
         print('Lowest Average: ', readings.lowest_avg, 'C')
         print('Average Mean Humidity: ', readings.humid_avg, '%')
